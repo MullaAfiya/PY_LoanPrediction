@@ -1,7 +1,17 @@
+#pandas==2.0.3
+#numpy==1.23.5
+#matplotlib==3.7.1
+#seaborn==0.12.2
+#statsmodels==0.14.0
+#imbalanced-learn==0.8.0
+#scikit-learn==1.0.2
+#jupyter==1.0.0
+
 pandas==2.0.3
 numpy==1.23.5
 matplotlib==3.7.1
 seaborn==0.12.2
 statsmodels==0.14.0
-imbalanced-learn==0.11.0
+imbalanced-learn==0.8.0
+scikit-learn==1.2.0  # Or a compatible version with wheels
 jupyter==1.0.0
