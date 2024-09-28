@@ -3,13 +3,18 @@ import sagemaker
 from sagemaker import get_execution_role
 from sagemaker.sklearn.model import SKLearnModel
 import time
+import os
 
 # Define S3 paths
 s3_model_uri = 's3://afiya-ml-s3/LoanStatus_artifacts.tar.gz'  # Path to the .tar.gz file
 
+# Create a temporary directory to download the script
+temp_dir = os.path.join(os.getenv('TEMP'), 'sagemaker_temp')
+os.makedirs(temp_dir, exist_ok=True)
+
 # Download inference.py from S3
 print("Downloading inference.py from S3...")
-local_script_path = '/tmp/inference.py'
+local_script_path = os.path.join(temp_dir, 'inference.py')  # Update the path to the temporary directory
 s3 = boto3.client('s3')
 try:
     s3.download_file('afiya-ml-s3', 'inference.py', local_script_path)
@@ -64,4 +69,3 @@ try:
 except Exception as e:
     print(f"Error deploying the model: {e}")
     raise
-
