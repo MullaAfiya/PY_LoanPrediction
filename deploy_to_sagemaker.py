@@ -1,9 +1,11 @@
 import boto3
 import sagemaker
-from sagemaker import get_execution_role
 from sagemaker.sklearn.model import SKLearnModel
 import time
 import os
+
+# Define your SageMaker execution role ARN here
+sagemaker_execution_role = 'arn:aws:iam::746669191450:role/service-role/AmazonSageMaker-ExecutionRole-20240925T171407'  # Replace with your role ARN
 
 # Define S3 paths
 s3_model_uri = 's3://afiya-ml-s3/LoanStatus_artifacts.tar.gz'  # Path to the .tar.gz file
@@ -23,14 +25,9 @@ except Exception as e:
     print(f"Failed to download inference.py: {e}")
     raise
 
-# Get the execution role
-print("Getting execution role...")
-try:
-    role = get_execution_role()
-    print(f"Execution role: {role}")
-except Exception as e:
-    print(f"Failed to get execution role: {e}")
-    raise
+# Use the specified execution role instead of getting it
+role = sagemaker_execution_role
+print(f"Using execution role: {role}")
 
 # Create a SageMaker model using the Scikit-learn container
 print("Creating SageMaker model...")
