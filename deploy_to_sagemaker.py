@@ -8,7 +8,7 @@ import os
 sagemaker_execution_role = 'arn:aws:iam::746669191450:role/service-role/AmazonSageMaker-ExecutionRole-20240925T171407'  # Replace with your role ARN
 
 # Define S3 paths
-s3_model_uri = 's3://afiya-ml-s3/LoanStatus_artifacts.tar.gz'  # Path to the .tar.gz file
+s3_model_uri = 's3://afiya-ml1-s3/LoanStatus_artifacts.tar.gz'  # Path to the .tar.gz file
 
 # Create a temporary directory to download the script
 temp_dir = os.path.join(os.getenv('TEMP'), 'sagemaker_temp')
@@ -19,7 +19,7 @@ print("Downloading inference.py from S3...")
 local_script_path = os.path.join(temp_dir, 'inference.py')  # Update the path to the temporary directory
 s3 = boto3.client('s3')
 try:
-    s3.download_file('afiya-ml-s3', 'inference.py', local_script_path)
+    s3.download_file('afiya-ml1-s3', 'inference.py', local_script_path)
     print("Downloaded inference.py successfully.")
 except Exception as e:
     print(f"Failed to download inference.py: {e}")
